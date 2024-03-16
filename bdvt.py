@@ -80,15 +80,15 @@ def create_instance(
     iam_instance_profile_arn
 ):
  user_data_script = f"""#!/bin/bash
- sudo yum update -y
- sudo yum install git -y
- sudo yum install python3-pip -y
- git clone https://github.com/GoogleCloudPlatform/professional-services-data-validator.git
- cd professional-services-data-validator
- pip3 install -r requirements.txt
- pip3 install -e .
- python3 -m data_validation validate column --source-conn YOUR_SOURCE_CONN --target-conn YOUR_TARGET_CONN --tables-list YOUR_SCHEMA.{table_name}=YOUR_TARGET_SCHEMA.{table_name} --sum col1,col2 --count col3
- """
+sudo yum update -y
+sudo yum install git -y
+sudo yum install python3-pip -y
+git clone https://github.com/GoogleCloudPlatform/professional-services-data-validator.git
+cd professional-services-data-validator
+pip3 install -r requirements.txt
+pip3 install -e .
+python3 -m data_validation validate column --source-conn YOUR_SOURCE_CONN --target-conn YOUR_TARGET_CONN --tables-list YOUR_SCHEMA.{table_name}=YOUR_TARGET_SCHEMA.{table_name} --sum col1,col2 --count col3
+"""
  instances = ec2_client.run_instances(
   ImageId=ami_id,
   InstanceType=instance_type,
