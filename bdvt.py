@@ -141,6 +141,14 @@ ec2 = session.client('ec2')
 # Spin up instances and assign tables for validation
 for i, table_name in enumerate(table_names):
  if i < num_instances:
-  instance_id = create_instance(ec2, table_name, ami_id, instance_type, key_name, security_group_ids, subnet_id,
-                                iam_instance_profile_arn)
+  instance_id = create_instance(
+   ec2,
+   table_name,
+   ami_id,
+   instance_type,
+   key_name,
+   security_group_ids,
+   subnet_id,
+   iam_instance_profile_arn
+  )
   print(f"Instance {instance_id} created for table {table_name}")
